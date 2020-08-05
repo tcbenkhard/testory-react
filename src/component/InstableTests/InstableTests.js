@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Card from "react-bootstrap/Card";
-import Chart from "react-google-charts";
 import {getInstableTests} from "../../client/testoryClient";
+import Table from "react-bootstrap/Table";
 
 export default () => {
     const [tests, setTests] = useState([]);
@@ -10,33 +10,38 @@ export default () => {
         getInstableTests().then(tests => setTests(tests));
     }, [])
 
-    const mapData = () => {
-        return tests.map(test => [test.package, test.class, test.count]);
+    const renderTableBody = () => {
+        return tests.map(t => <tr>
+            <td>{t.application}</td>
+            <td>{t.package}</td>
+            <td>{t.class}</td>
+            <td>{t.count}</td>
+        </tr>)
+    }
+
+    const renderBootstrapTable = () => {
+        return (
+            <Table hover size="sm">
+                <thead>
+                <tr>
+                    <th>Application</th>
+                    <th>Class</th>
+                    <th>Method</th>
+                    <th>Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {renderTableBody()}
+                </tbody>
+            </Table>
+        )
     }
 
     return (
         <Card>
             <Card.Body>
                 <Card.Title>Least stable tests</Card.Title>
-                <Chart
-                    width={'500px'}
-                    height={'250px'}
-                    chartType="Table"
-                    loader={<div>Loading Chart</div>}
-                    data={[
-                        [
-                            { type: 'string', label: 'Package' },
-                            { type: 'string', label: 'Class' },
-                            { type: 'number', label: 'Count'}
-                        ],
-                        ...mapData()
-                    ]}
-                    options={{
-                        showRowNumber: false,
-                        width: '100%'
-                    }}
-                    rootProps={{ 'data-testid': '1' }}
-                />
+                {renderBootstrapTable()}
             </Card.Body>
         </Card>
     )

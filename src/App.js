@@ -31,6 +31,8 @@ function App() {
                 <Col>
                     <RunsOverview applications={applications}/>
                 </Col>
+            </Row>
+            <Row>
                 <Col>
                     <InstableTests/>
                 </Col>

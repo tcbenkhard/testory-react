@@ -42,12 +42,13 @@ export default ({applications}) => {
             <Card.Body>
                 <Card.Title>Overall</Card.Title>
                 <Chart
-                    width={'500px'}
+                    width={'100%'}
                     height={'250px'}
                     chartType="AreaChart"
 
                     loader={<div>Loading Chart</div>}
                     data={mapData()}
+
                     options={{
                         isStacked: true,
                         colors: ['red', 'yellow', 'green'],
