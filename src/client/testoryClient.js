@@ -18,3 +18,12 @@ export const getLatestRuns = async () => {
         throw result;
     }
 }
+
+export const getInstableTests = async () => {
+    const result = await axios.get('http://localhost:3000/tests/instable');
+    if(result.status === 200) {
+        return result.data;
+    } else {
+        throw result;
+    }
+}

@@ -8,6 +8,7 @@ import ApplicationOverview from "./component/ApplicationOverview/ApplicationOver
 import Navigation from "./component/Navigation/Navigation";
 import RunsOverview from "./component/RunsOverview/RunsOverview";
 import {getApplications} from "./client/testoryClient";
+import InstableTests from "./component/InstableTests/InstableTests";
 
 function App() {
     const [applications, setApplications] = useState([]);
@@ -29,6 +30,9 @@ function App() {
             <Row>
                 <Col>
                     <RunsOverview applications={applications}/>
+                </Col>
+                <Col>
+                    <InstableTests/>
                 </Col>
             </Row>
             <Row>
