@@ -21,7 +21,7 @@ export default (props) => {
 
     const renderOrb = () => {
         if(latestRun) {
-            if(latestRun.tests === latestRun.succeeded)
+            if(latestRun.errors === 0)
                 return (<img src={orbGreen} alt={'success'} height={50}/>)
             else
                 return (<img src={orbRed} alt={'failed'} height={50}/>)
