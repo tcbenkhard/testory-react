@@ -11,7 +11,7 @@ export default () => {
     }, [])
 
     const mapData = () => {
-        return tests.map(test => [test.application, test.package, test.class, test.count]);
+        return tests.map(test => [test.package, test.class, test.count]);
     }
 
     return (
@@ -25,7 +25,6 @@ export default () => {
                     loader={<div>Loading Chart</div>}
                     data={[
                         [
-                            { type: 'string', label: 'Application' },
                             { type: 'string', label: 'Package' },
                             { type: 'string', label: 'Class' },
                             { type: 'number', label: 'Count'}
@@ -33,7 +32,7 @@ export default () => {
                         ...mapData()
                     ]}
                     options={{
-                        showRowNumber: true,
+                        showRowNumber: false,
                         width: '100%'
                     }}
                     rootProps={{ 'data-testid': '1' }}
