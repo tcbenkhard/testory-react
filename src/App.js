@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ApplicationOverview from "./component/ApplicationOverview/ApplicationOverview";
+import Navigation from "./component/Navigation/Navigation";
+import RunsOverview from "./component/RunsOverview/RunsOverview";
+import {getApplications} from "./client/testoryClient";
 
 function App() {
+    const [applications, setApplications] = useState([]);
+
+    useEffect(() => {
+        getApplications()
+            .then(result => setApplications(result))
+            .catch(error => console.log(error));
+    }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <Container>
+            <Row>
+                <Col>
+                    <Navigation/>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <RunsOverview applications={applications}/>
+                </Col>
+            </Row>
+            <Row>
+                <Col><ApplicationOverview applications={applications}/></Col>
+            </Row>
+        </Container>
     </div>
   );
 }
